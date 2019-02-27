@@ -1,0 +1,220 @@
+.simple-quiz-shell-head,
+.simple-quiz-shell-head-logo,
+.simple-quiz-shell-title,
+.simple-quiz-shell-main,
+.simple-quiz-shell-main-question,
+.simple-quiz-shell-main-game,
+.simple-quiz-shell-timer,
+.simple-quiz-shell-input,
+.simple-quiz-shell-foot,
+.simple-quiz-shell-login,
+.simple-quiz-shell-welcome,
+.simple-quiz-shell-gameover,
+.simple-quiz-shell-info,
+.simple-quiz-shell-error {
+    position: absolute;
+}
+
+.simple-quiz-shell-head {
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 37px;
+    background: white;
+}
+
+.simple-quiz-shell-head-logo {
+    top: 13px;
+    right: 48%;
+    height: 49px;
+    width: 104px;
+    background: white;
+    z-index: 3;
+}
+
+.simple-quiz-shell-title {
+    top: 20%;
+    left: 15%;
+    height: 25px;
+    width: 198px;
+    background: white;
+    font-family: arial, helvetica, sans-serif;
+}
+
+.simple-quiz-shell-name {
+    position: absolute;
+    height: 25px;
+    top: 20%;
+    right: 5%;
+    width: 450px;
+    background: white;
+    font-family: arial, helvetica, sans-serif;
+}
+
+.simple-quiz-shell-main {
+    top: 40px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.simple-quiz-shell-main-game,
+.simple-quiz-shell-main-question {
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
+.simple-quiz-shell-main-question-title {
+    top: 24px;
+    left: 222px;
+    position: absolute;
+}
+
+.simple-quiz-shell-main-question-img {
+    left: 3%;
+    top: 65px;
+    position: absolute;
+}
+
+.simple-quiz-shell-main-question {
+    width: 50%;
+    background: white;
+}
+
+.simple-quiz-shell-main-game {
+    width: 50%;
+    right: 0;
+    background: white;
+}
+
+.simple-quiz-shell-main-game div {
+}
+
+.simple-quiz-shell-timer {
+    width: 100%;
+    height: 33%;
+}
+
+.simple-quiz-shell-timer-time {
+    position: absolute;
+    top: 48px;
+    bottom: 111px;
+    left: 10%;
+    right: 0;
+    width: 180px;
+    height: 85px;
+    font-size: 70px;
+    color: #0056ff;
+}
+
+.simple-quiz-shell-input {
+    position: absolute;
+    top: 143px;
+    left: 0px;
+    right: 0px;
+    background: #fcfcfc;
+}
+
+.simple-quiz-shell-input-content {
+    position: absolute;
+    top: 0px;
+    left: 10%;
+}
+
+input {
+    padding: 10px;
+    font-size: 20px;
+}
+
+.simple-quiz-shell-foot {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+}
+
+.simple-quiz-shell-welcome,
+.simple-quiz-shell-gameover,
+.simple-quiz-shell-info,
+.simple-quiz-shell-error,
+.simple-quiz-shell-login {
+    margin-top: -200px;
+    margin-left: -200px;
+    top: 50%;
+    left: 50%;
+    width: 420px;
+    height: 400px;
+    background: #d0d9e5;
+    border-radius: 3px;
+    z-index: 2;
+    box-shadow: 4px 4px;
+}
+
+/*///*/
+.simple-quiz-shell-login {
+    height: 141px
+}
+
+.simple-quiz-shell-login form {
+    position: absolute;
+    top: 50px;
+    left: 8px;
+}
+
+.simple-quiz-shell-login h2 {
+    left: 8px;
+    top: 8px;
+    position: absolute;
+}
+
+/*//*/
+.simple-quiz-shell-welcome {
+    height: 140px;
+}
+
+.simple-quiz-shell-welcome div {
+    position: absolute;
+    top: 8px;
+    left: 70px;
+}
+
+/*//*/
+/*//*/
+.simple-quiz-shell-info {
+    height: 100px;
+    width: 250px;
+    top: 295px;
+    left: 678px;
+}
+
+.simple-quiz-shell-info div {
+    position: absolute;
+    top: 9px;
+    left: 19px;
+}
+
+/*//*/
+/*//*/
+.simple-quiz-shell-gameover {
+    height: 100px;
+
+}
+
+.simple-quiz-shell-gameover p {
+    bottom: -8px;
+    left: 10px;
+    position: absolute;
+}
+
+.simple-quiz-shell-gameover div {
+    margin: auto;
+    width: max-content;
+    padding: 10px;
+}
+
+/*//*/
+
+.simple-quiz-shell-hidden {
+    display: none;
+}

@@ -1,0 +1,40 @@
+.centered {
+   text-align: center;
+}
+
+#instructions td {
+  line-height:0.7;
+}
+
+.table td {
+    text-align:center;
+}
+
+.table-borderless > tbody > tr > td,
+.table-borderless > tbody > tr > th,
+.table-borderless > tfoot > tr > td,
+.table-borderless > tfoot > tr > th,
+.table-borderless > thead > tr > td,
+.table-borderless > thead > tr > th {
+    border: none;
+}
+
+
+#noMatch {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 9999;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+}
+
+.container-small {
+   max-width: 30%;
+   position: fixed;
+   top: 30%;
+   left: 50%;
+   z-index: 9999;
+   /* bring your own prefixes */
+   transform: translate(-50%, -50%);
+}

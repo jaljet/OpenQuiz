@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+    <title>Викторина</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="shortcut icon" href="favicon.ico"/>
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="css/simple-quiz.css" type="text/css"/>
+    <link rel="stylesheet" href="css/simple-quiz.shell.css" type="text/css"/>
+    <!-- third-party javascript -->
+    <script src="js/lib/jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="js/lib/js.cookie-2.1.4.min.js"></script>
+    <!-- our javascript -->
+    <script src="js/simple-quiz.js"></script>
+    <script src="js/simple-quiz.model.js"></script>
+    <script src="js/simple-quiz.shell.js"></script>
+
+    <script>
+        $(function () {
+            simpleQuiz.initModule($('#simple-quiz'));
+        });
+        $(document).keypress(function (e) {
+            //todo: this should go somewhere else
+            if (e.which == 13) {
+                $("#send").click();
+            }
+        });
+    </script>
+</head>
+<body>
+<div id="simple-quiz"></div>
+</body>
+</html>

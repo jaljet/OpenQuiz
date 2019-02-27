@@ -1,0 +1,26 @@
+Game server setup:
+0. install wildfly wildfly-10.1.0.Final
+1. set JBOSS_HOME=<path to jboss installation>
+2. start wildfly server with standalone.bat -b 0.0.0.0 -Djboss.http.port=80
+3. execute configure-server.cli:
+    jboss-cli.bat --connect --file=<path to file>/configure-server.cli
+4. copy "com" folder in ${wildfly home}/modules
+5. replace index.html in ${wildfly home}/welcome-content to misc/index.html
+6. install h2console by placing misc/h2console.war to ${wildfly home}/standalone/deployments folder
+7. reboot the server
+8. mvn package
+9. copy simpleQuiz.war to  ${wildfly home}/standalone/deployments folder
+10. go to localhost/h2console and login to app db:
+Saved Settings: Generic H2 (Server)
+Driver Class: org.h2.Driver
+JDBC URL: jdbc:h2:file:./data/prod
+User Name: sa
+//todo the password must not be hardcoded, should also switch to managed datasource
+Password: OgJj5Z45bLeKEP19pHiXSdCFjtyDUhq3XzWaQct5KIbxBBiJ2EvJKSu4zPjh4nUeH8dG7c3uHcbZXri3
+11. execute content of misc/setupSql.sql (admin user is added at this point)
+12. go to http://localhost/simpleQuiz/admin.html :
+User Name: admin@email.com
+Password: OgJj5Z45bLeKEP19pHiXSdCFjtyDUhq3XzWaQct5KIbxBBiJ2EvJ
+13. press two "Submit Query" buttons to add sample questions and players to the game
+14. go to localhost and enter one of the the sample email
+15. play the game

@@ -1,0 +1,190 @@
+-todo: add step to configure.md:
+set  <host name="default-host" alias="localhost" default-web-module="simpleQuiz.war">
+in standalone.xml
+
+prepare prod:
+-change passwords
+-load users
+-load questions
+
+select email, office, count(iscorrect)  points
+    from playeranswerstate a,
+    player p,
+    users u
+where
+    iscorrect = 'true' and
+    u.email = p.name and
+    a.player = p.id group by player
+    order by points desc;
+
+Ivan Ivanov, Иванов Иван Иванович, ivan2.ivanov@email.com
+Petr Petrov, Петров Петр Петрович, petr2.petrov@email.com
+Sidor Sidorov, Сидоров Сидор Сидорович, sidor2.sidorov@email.com
+Some Surname,,some2.some@email.com
+
+-pics instead of text
+-answer button and next qustion button
+-timeout for a given question
+-don't print current scrore, in the end of the game just print:
+Викторина окончена, %username%!
+Ваши баллы: %score%
+
+-------------------
+draw table diagram and queries you would like to have or
+instead api
+
+i have a userName,
+if(userName present in player)
+{
+    if(its current lives > 0)
+    {
+        return answers for current question and lives
+    }
+}
+else
+{
+   add player and assign current question
+}
+
+PlayersAnswer
+player question answer match score
+
+Question
+answer
+
+Answer
+question answer score
+
+Players
+name currentQuestion lives total score
+
+PlayerState
+player question lives
+
+xml
+game:
+player
+current question
+players asnwers
+matched answers and their rating
+lives
+next answer
+
+in mandatory parameter is only player name
+if next answer is present then question have to be present too, if so
+match it against answers
+
+https://developer.jboss.org/thread/238534
+
+//todod modify pom to use wildfly downloaded from inet
+
+
+https://stackoverflow.com/questions/26900812/basic-authentication-with-arquillian-testing-in-jboss
+
+
+
+regarding wildfly embedded logging
+https://developer.jboss.org/thread/273081
+
+//todo hmm, seems like I don't need to call em.persist(player) explicitly in GameRest
+---
+next steps:
+-handle errors in ui
+-color attempts to answer current question
+-make a question bigger
+-make all ui in russian
+-real questions import implementation: process existing format, import it
+
+//in order to reset game for a player one must delte the following:
+select * from playeranswer where playerId;
+select * from playerstate where playerId;
+select * from player;
+
+delete from playeranswer;
+delete from playerstate;
+delete from player;
+
+//todo remove user
+//todo: remove all questions
+
+//next steps: modify authentication: registration form? main issue here is that
+a user can easily create another account to answer his questions
+//add synonyms to "real" questions
+
+
+https://stackoverflow.com/questions/14361517/mark-error-in-form-using-bootstrap
+ <div class="control-group error">
+      <label class="control-label" for="inputError">Input with error</label>
+      <div class="controls">
+        <input type="text" id="inputError">
+        <span class="help-inline">Please correct the error</span>
+      </div>
+    </div>
+
+
+https://github.com/undertow-io/undertow/blob/master/core/src/main/java/io/undertow/server/handlers/SetHeaderHandler.java
+
+<filter name="custom-filter" class-name="com.xartifex.wildfly.custom.security.PreventBasicAuthPopupFilter" module="com.xartifex.wildfly.custom.security"/>
+
+
+
+ <subsystem xmlns="urn:jboss:domain:undertow:3.1">
+            <buffer-cache name="default"/>
+            <server name="default-server">
+                <http-listener name="default" socket-binding="http" redirect-socket="https" enable-http2="true"/>
+                <https-listener name="https" socket-binding="https" security-realm="ApplicationRealm" enable-http2="true"/>
+                <host name="default-host" alias="localhost">
+                    <location name="/" handler="welcome-content"/>
+                    <filter-ref name="server-header"/>
+                    <filter-ref name="x-powered-by-header"/>
+                    <filter-ref name="custom-filter"/>
+                </host>
+            </server>
+            <servlet-container name="default">
+                <jsp-config/>
+                <websockets/>
+            </servlet-container>
+            <handlers>
+                <file name="welcome-content" path="${jboss.home.dir}/welcome-content"/>
+            </handlers>
+            <filters>
+                <response-header name="server-header" header-name="Server" header-value="WildFly/10"/>
+                <response-header name="x-powered-by-header" header-name="X-Powered-By" header-value="Undertow/1"/>
+                <filter name="custom-filter" class-name="com.xartifex.wildfly.custom.security.PreventBasicAuthPopupFilter" module="com.xartifex.wildfly.custom.security"/>
+            </filters>
+        </subsystem>
+
+---------
+-get rid of import sql from main
+https://stackoverflow.com/a/43604669
+
+----------valid domain
+
+<security-domain name="simple-quiz" cache-type="default">
+                    <authentication>
+                        <login-module code="Database" flag="required">
+                            <module-option name="dsJndiName" value="java:jboss/datasources/SimpleQuizDS"/>
+                            <module-option name="principalsQuery" value="SELECT PASSWORD FROM USERS WHERE EMAIL = ?"/>
+                            <module-option name="rolesQuery" value="SELECT R.ROLE, 'Roles' FROM USERS_ROLES UR INNER JOIN ROLES R ON R.ID = UR.ROLE_ID INNER JOIN USERS U ON U.ID = UR.USER_ID WHERE U.EMAIL = ?"/>
+                        </login-module>
+                    </authentication>
+                </security-domain>
+
+-------------------
+todo:  Removing WWW-Authenticate  - move to debug level logging
+todo: log IP Address
+todo: log full requests?
+todo: do I need to be able to reset players state from admin right away?
+todo: configure logging for app classes in wildfly
+
+/subsystem=undertow/configuration=filter/custom-filter="custom-auth-filter":add(class-name=com.xartifex.wildfly.custom.security.PreventBasicAuthPopupFilter,module=com.xartifex.wildfly.custom.security)
+/subsystem=undertow/server=default-server/host=default-host/filter-ref=custom-auth-filter:add()
+
+/simpleQuiz/admin.html
+http://localhost:8080/h2console/
+
+todo: баллов/балла
+todo: send mismatch status in order to avoid false messages about match
+todo: fix instructions table selection
+
+

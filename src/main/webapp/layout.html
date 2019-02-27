@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+<head>
+    <title>HTML Layout</title>
+    <link rel="stylesheet" href="css/simple-quiz.css" type="text/css"/>
+    <style>
+        .simple-quiz-shell-head,
+        .simple-quiz-shell-head-logo,
+        .simple-quiz-shell-title,
+        .simple-quiz-shell-main,
+        .simple-quiz-shell-main-question,
+        .simple-quiz-shell-main-game,
+        .simple-quiz-shell-timer,
+        .simple-quiz-shell-input,
+        .simple-quiz-shell-foot,
+        .simple-quiz-shell-welcome,
+        .simple-quiz-shell-gameover,
+        .simple-quiz-shell-info,
+        .simple-quiz-shell-error {
+            position: absolute;
+        }
+
+        .simple-quiz-shell-head {
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+        }
+
+        .simple-quiz-shell-head-logo {
+            top: 4px;
+            left: 4px;
+            height: 32px;
+            width: 128px;
+            background: orange;
+        }
+
+        .simple-quiz-shell-title {
+            top: 4px;
+            left: 280px;
+            height: 32px;
+            width: 512px;
+            background: #65afff;
+        }
+
+        .simple-quiz-shell-main {
+            top: 40px;
+            left: 0;
+            bottom: 40px;
+            right: 0;
+        }
+
+        .simple-quiz-shell-main-game,
+        .simple-quiz-shell-main-question {
+            top: 0;
+            bottom: 0;
+            z-index: 1;
+        }
+
+        .simple-quiz-shell-main-question {
+            width: 50%;
+            background: #eee;
+        }
+
+        .simple-quiz-shell-main-game {
+            width: 50%;
+            right: 0;
+            background: #ddd;
+        }
+
+        .simple-quiz-shell-timer {
+            top: 4px;
+            bottom: 250px;
+            left: 4px;
+            right: 4px;
+            background: #52ff61;
+        }
+
+        .simple-quiz-shell-input {
+            /*display:none;*/
+            top: 225px;
+            bottom: 4px;
+            left: 4px;
+            right: 4px;
+            background: #ffa83c;
+        }
+
+        .simple-quiz-shell-foot {
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+        }
+
+        .simple-quiz-shell-welcome,
+        .simple-quiz-shell-gameover,
+        .simple-quiz-shell-info,
+        .simple-quiz-shell-error {
+            margin-top: -200px;
+            margin-left: -200px;
+            top: 50%;
+            left: 50%;
+            width: 400px;
+            height: 400px;
+            background: #fff;
+            border-radius: 3px;
+            z-index: 2;
+        }
+
+        .simple-quiz-shell-hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="simple-quiz">
+    <div class="simple-quiz-shell-head">
+        <div class="simple-quiz-shell-head-logo"></div>
+        <div class="simple-quiz-shell-title">Онлайн Викторина</div>
+    </div>
+    <div class="simple-quiz-shell-main">
+        <div class="simple-quiz-shell-main-question"></div>
+        <div class="simple-quiz-shell-main-game">
+            <div class="simple-quiz-shell-timer">
+            </div>
+            <div class="simple-quiz-shell-input"></div>
+        </div>
+    </div>
+    <div class="simple-quiz-shell-foot"></div>
+    <div class="simple-quiz-shell-welcome"></div>
+    <div class="simple-quiz-shell-gameover"></div>
+    <div class="simple-quiz-shell-info"></div>
+    <div class="simple-quiz-shell-error"></div>
+</div>
+</body>
+</html>
