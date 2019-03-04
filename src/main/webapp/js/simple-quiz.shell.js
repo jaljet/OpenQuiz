@@ -37,7 +37,7 @@ simpleQuiz.shell = (function () {
             + '</div>'
             + '<div class="simple-quiz-shell-foot simple-quiz-shell-hidden"></div>'
             + '<div class="simple-quiz-shell-welcome simple-quiz-shell-hidden"><div><h3>Добро пожаловать на онлайн викторину!</h3>'
-            + '<p>Данная викторина состоит из 10 вопросов.</p>'
+            + '<p id="rules"></p>'
             + '<p>На каждый вопрос дана одна минута.</p>'
             + '<input id="welcomeStart" type="submit" value="Получить первый вопрос"></div>'
             + '</div>'
@@ -146,14 +146,13 @@ simpleQuiz.shell = (function () {
         var answer = jqueryMap.$main.find('#answer');
         var send = jqueryMap.$main.find('#send');
         //
-        answer.focusout(function (event) {
-            event.target.checkValidity();
-        }).bind('invalid', function (event) {
-            answer.val("");
-            setTimeout(function () {
-                $(event.target).focus();
-            }, 50);
-            answer.prop('placeholder', 'Кириллица или цифры');
+        $(document).ready(function(){
+                         var rules = document.getElementById('rules');
+                         rules.innerHTML = $.ajax({
+                            type: "GET",
+                            url: "rest/admin/rules",
+                            async: false,
+                            }).responseText;
         });
         //
 
