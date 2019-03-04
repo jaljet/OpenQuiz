@@ -24,11 +24,13 @@ public class Util {
             Scanner textAnswerScan = new Scanner(questionsScanner.next());
             textAnswerScan.useDelimiter("\\|");
             String questionStr = textAnswerScan.next().trim();
-            String answer = textAnswerScan.next().trim();
-            Question question = new Question();
-            question.setQuestion(questionStr);
-            question.setAnswer(answer);
-            questions.add(question);
+            if (!questionStr.equals("")) {
+                String answer = textAnswerScan.next().trim();
+                Question question = new Question();
+                question.setQuestion(questionStr);
+                question.setAnswer(answer);
+                questions.add(question);
+            }
         }
         return questions;
     }
@@ -37,13 +39,17 @@ public class Util {
         Set<UserInfo> users = new HashSet<>();
         Scanner scanner = new Scanner(data);
         while (scanner.hasNextLine()) {
-            Scanner csv = new Scanner(scanner.nextLine());
-            csv.useDelimiter(",");
-            String name = csv.next();
-            String rusName = csv.next();
-            String email = csv.next();
-            String office = csv.hasNext() ? csv.next() : "";
-            users.add(new UserInfo(name.trim(), rusName.trim(), email.trim().toLowerCase(), office.trim()));
+            String line = scanner.nextLine();
+            String tline = line.trim();
+            if (!tline.equals("")) {
+                Scanner csv = new Scanner(line);
+                csv.useDelimiter(",");
+                String name = csv.next();
+                String rusName = csv.next();
+                String email = csv.next();
+                String office = csv.hasNext() ? csv.next() : "";
+                users.add(new UserInfo(name.trim(), rusName.trim(), email.trim().toLowerCase(), office.trim()));
+            }
         }
         return users;
     }
