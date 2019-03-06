@@ -104,4 +104,7 @@ public class GameDAO {
             addQuestion(question);
         }
     }
+    public Rule getRule (long id){
+            return em.find(Rule.class, id);
+    }
 }

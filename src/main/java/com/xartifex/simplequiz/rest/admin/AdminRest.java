@@ -10,13 +10,9 @@ import org.slf4j.Logger;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
 @RolesAllowed({"admins"})
@@ -53,5 +49,11 @@ public class AdminRest {
         userDAO.addUsers(users);
         log.info("Players to add: " + users);
         return Response.status(Response.Status.OK).entity("Users added.").build();
+    }
+
+    @GET
+    @Path("/rules")
+    public String getRules()  {
+        return gameDAO.getRule(400003).getText();
     }
 }
