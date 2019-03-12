@@ -21,6 +21,12 @@
                 addPlayers();
             });
         });
+        $( document ).ready( function() {
+            $('#timeout').submit(function(event) {
+                event.preventDefault();
+                setQuizTimeout();
+            });
+        });
     </script>
 </head>
 <body>
@@ -55,6 +61,14 @@ Petr Petrov, Петров Петр Петрович, petr.petrov@email.com
 Sidor Sidorov, Сидоров Сидор Сидорович, sidor.sidorov@email.com
 Some Surname,,some.some@email.com
 </textarea>
+
+<p> Время на вопрос</p>
+<form id="timeout">
+    <input type="submit">
+</form>
+<br>
+
+<input type="text" id="timeoutValue" size="40" form="timeout">
 
 </body>
 </html>

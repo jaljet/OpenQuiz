@@ -56,4 +56,17 @@ public class AdminRest {
     public String getRules()  {
         return gameDAO.getRule(400003).getText();
     }
+
+
+    //set Timeout
+    @POST
+    @Path("/setQuizTimeout")
+    @Consumes("text/plain")
+    @Produces("text/plain")
+    public Response setQuizTimeout(String data){
+        long timeout = Util.getTimeout(data);
+        gameDAO.setQuizTimeout(timeout);
+        log.info("Timeout change to" + timeout);
+        return Response.status(Response.Status.OK).entity("Timeout set.").build();
+    }
 }
