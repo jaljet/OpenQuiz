@@ -58,6 +58,9 @@ public class GameDAO {
     public static final String GET_NEXT_QUESTION_QUERY = "SELECT q FROM Question q WHERE q NOT IN " +
             "(SELECT p.question from PlayerAnswerState p where p.player = :player)";
 
+    //setTimeout
+    public static final String SET_QUESTIONS_TIMEOUT = "UPDATE  Question q SET q.timeout = :timeout";
+
     public Question getNextQuestion(Player player) {
         Query countQuery = em.createQuery(GET_NEXT_QUESTIONS_COUNT_QUERY)
                 .setParameter("player", player);
@@ -106,5 +109,11 @@ public class GameDAO {
     }
     public Rule getRule (long id){
             return em.find(Rule.class, id);
+    }
+
+    public void setQuizTimeout(long timeout){
+        Query selectQuery = em.createQuery(SET_QUESTIONS_TIMEOUT);
+        selectQuery.setParameter("timeout", timeout);
+        selectQuery.executeUpdate();
     }
 }
