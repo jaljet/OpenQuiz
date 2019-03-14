@@ -17,3 +17,16 @@ function addPlayers() {
        contentType: 'text/plain'
    })
 }
+
+function setQuizTimeout() {
+
+    var timeoutValue = $('#timeoutValue').val();
+    $.ajax({
+        type: "POST",
+        url: "rest/admin/setQuizTimeout",
+        data: timeoutValue,
+        contentType: 'text/plain'
+    })
+    console.log(timeoutValue);
+
+}

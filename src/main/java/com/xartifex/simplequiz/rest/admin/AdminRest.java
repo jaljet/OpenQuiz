@@ -73,5 +73,17 @@ public class AdminRest {
         gameDAO.checkAnswer(Long.parseLong(st.nextToken()), Integer.parseInt(st.nextToken()));
         log.info("Answers checked");
         return Response.status(Response.Status.OK).entity("Answers checked.").build();
+======
+
+    //set Timeout
+    @POST
+    @Path("/setQuizTimeout")
+    @Consumes("text/plain")
+    @Produces("text/plain")
+    public Response setQuizTimeout(String data){
+        long timeout = Util.getTimeout(data);
+        gameDAO.setQuizTimeout(timeout);
+        log.info("Timeout change to" + timeout);
+        return Response.status(Response.Status.OK).entity("Timeout set.").build();
     }
 }

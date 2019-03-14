@@ -35,6 +35,17 @@ public class Util {
         return questions;
     }
 
+    //Timeout
+
+    public static long getTimeout(String data){
+
+        long timeout = 0;
+        Scanner timeoutScanner = new Scanner(data);
+        timeout =  Long.valueOf(timeoutScanner.next().trim());
+
+        return timeout;
+    }
+
     public static Set<UserInfo> getUsers(String data) {
         Set<UserInfo> users = new HashSet<>();
         Scanner scanner = new Scanner(data);
