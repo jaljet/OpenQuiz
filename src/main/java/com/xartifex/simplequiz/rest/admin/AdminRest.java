@@ -14,6 +14,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.util.Collection;
 import java.util.Set;
+import java.util.StringTokenizer;
 
 @RolesAllowed({"admins"})
 @Path("/admin")
@@ -57,6 +58,22 @@ public class AdminRest {
         return gameDAO.getRule(400003).getText();
     }
 
+    @GET
+    @Path("/check/answers")
+    public String getAnswers()  {
+        return gameDAO.getAnswers();
+    }
+
+    @POST
+    @Path("/check/answer")
+    @Consumes("text/plain")
+    @Produces("text/plain")
+    public Response checkAnswer(String data)  {
+        StringTokenizer st = new StringTokenizer(data, "|");
+        gameDAO.checkAnswer(Long.parseLong(st.nextToken()), Integer.parseInt(st.nextToken()));
+        log.info("Answers checked");
+        return Response.status(Response.Status.OK).entity("Answers checked.").build();
+======
 
     //set Timeout
     @POST
