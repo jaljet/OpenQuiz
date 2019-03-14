@@ -107,4 +107,22 @@ public class GameDAO {
     public Rule getRule (long id){
             return em.find(Rule.class, id);
     }
+
+    public String getAnswers(){
+        String result = "";
+        Query query = em.createQuery("FROM PlayerAnswerState");
+        List<PlayerAnswerState> answers = new ArrayList<PlayerAnswerState>();
+        answers = query.getResultList();
+        for (PlayerAnswerState answer: answers) {
+            result = result + answer.toShortString();
+        }
+        return  result;
+    }
+
+    public void checkAnswer(long id,int correct){
+        String sQuery = "Update PlayerAnswerState Set checkedIsCorrect = :correct where id = :id";
+        Query query = em.createQuery(sQuery).setParameter("id", id)
+                .setParameter("correct", correct);
+        query.executeUpdate();
+    }
 }

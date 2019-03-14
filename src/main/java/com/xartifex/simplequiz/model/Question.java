@@ -91,4 +91,8 @@ public class Question implements Serializable {
                 ", points=" + points +
                 '}';
     }
+
+    public String toShortString() {
+        return  question  + " Ответ: " + answer + "|" + id + ";";
+    }
 }

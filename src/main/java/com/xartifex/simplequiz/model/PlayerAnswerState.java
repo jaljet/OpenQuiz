@@ -5,6 +5,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 
 @Entity
 @Table(uniqueConstraints = {
@@ -29,6 +30,8 @@ public class PlayerAnswerState implements Serializable {
     private String answer;
 
     boolean isCorrect;
+
+    int checkedIsCorrect;
 
     long expiresOn;
 
@@ -72,6 +75,14 @@ public class PlayerAnswerState implements Serializable {
         isCorrect = correct;
     }
 
+    public int getCheckedIsCorrect() {
+        return checkedIsCorrect;
+    }
+
+    public void setCheckedIsCorrect(int checkedIsCorrect) {
+        this.checkedIsCorrect = checkedIsCorrect;
+    }
+
     public long getExpiresOn() {
         return expiresOn;
     }
@@ -103,7 +114,14 @@ public class PlayerAnswerState implements Serializable {
                 ", question=" + question +
                 ", answer='" + answer + '\'' +
                 ", isCorrect=" + isCorrect +
+                ", checkedIsCorrect=" + checkedIsCorrect +
                 ", expiresOn=" + expiresOn +
                 '}';
+    }
+
+    public String toShortString() {
+        SimpleDateFormat formatDate = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+        return  player.getName() + "|" + question.getQuestion() + "|" + question.getAnswer() + "|" + answer + "|"
+                + formatDate.format(expiresOn) + "|" + isCorrect + "|" + checkedIsCorrect + "|" + Id + ";";
     }
 }
