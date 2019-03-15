@@ -66,7 +66,7 @@ public class AdminRest {
     @GET
     @Path("/rules")
     public String getRules()  {
-        return gameDAO.getRule(400003L).getText();
+        return gameDAO.getRule().getText();
     }
 
     @GET
