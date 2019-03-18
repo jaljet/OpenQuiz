@@ -13,7 +13,9 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
+import java.util.StringTokenizer;
 
 @RolesAllowed({"admins"})
 @Path("/admin")
@@ -50,13 +52,40 @@ public class AdminRest {
         log.info("Players to add: " + users);
         return Response.status(Response.Status.OK).entity("Users added.").build();
     }
-
+    @POST
+    @Path("/addRules")
+    @Consumes("text/plain")
+    @Produces("text/plain")
+    public Response addRules(String data) {   
+        List rules = Util.getRules(data);
+        gameDAO.addRules(rules);
+        log.info("Rules to add: " + rules);
+        return Response.status(Response.Status.OK).entity("Rules added.").build();
+    }
+    
     @GET
     @Path("/rules")
     public String getRules()  {
-        return gameDAO.getRule(400003).getText();
+        return gameDAO.getRule().getText();
     }
 
+    @GET
+    @Path("/check/answers")
+    public String getAnswers()  {
+        return gameDAO.getAnswers();
+    }
+
+    @POST
+    @Path("/check/answer")
+    @Consumes("text/plain")
+    @Produces("text/plain")
+    public Response checkAnswer(String data)  {
+        StringTokenizer st = new StringTokenizer(data, "|");
+        gameDAO.checkAnswer(Long.parseLong(st.nextToken()), Integer.parseInt(st.nextToken()));
+        log.info("Answers checked");
+        return Response.status(Response.Status.OK).entity("Answers checked.").build();
+    }
+    
 
     //set Timeout
     @POST
