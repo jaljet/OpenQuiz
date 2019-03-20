@@ -29,6 +29,12 @@
                 setQuizTimeout();
             });
         });
+        $( document ).ready( function() {
+            $('#newrules').submit(function(event) {
+                event.preventDefault();
+                addRules();
+            });
+        });
     </script>
 
     <!-- jquery UI -->
@@ -51,6 +57,7 @@
         <li><a href="#tabs-3">Question's settings</a></li>
         <li><a href="#tabs-4">Rules</a></li>
         <li><a href="#tabs-5">Tools</a></li>
+        <li><a href="#tabs-6">Check answers</a></li>
     </ul>
 
     <div id="tabs-1">
@@ -98,14 +105,20 @@
     </div>
     <div id="tabs-4">
         <p> Здесь будут правила</p>
-        <textarea id="" rows="8" cols="100" name="comment" form="">
-             Здесь будут правила
+        <textarea id="rulesData" rows="8" cols="100" name="comment" form="newrules">
+            Привет пользователь. На каждый вопрос тебе будет дано ${SECONDS_PER_QUESTION} секунд.
+            После этого пройди по ${SOME_EXTERNAL_LINK} и ты увидишь результаты.
         </textarea>
+        <form id="newrules">
+            <input type="submit">
+        </form>
     </div>
     <div id="tabs-5">
         <p> Здесь будет возможность просмотра ответов пользователей</p>
     </div>
-
+    <div id="tabs-6" style="height: 100vh;">
+        <iframe id="checkTabFrame"src="check.html" width="100%" height="100%" style="border: none;"></iframe>
+    </div>
 </div>
 
 </body>
