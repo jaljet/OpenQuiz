@@ -125,6 +125,7 @@ public class GameDAO {
     public void addRules(List<Rule> rules) {
         addRule(rules.get(rules.size() - 1));
     }
+    
     public Rule getRule (){
         Query query = em.createQuery("FROM Rule");
         return (Rule) query.getSingleResult();
