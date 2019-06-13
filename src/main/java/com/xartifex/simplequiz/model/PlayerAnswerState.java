@@ -30,9 +30,10 @@ public class PlayerAnswerState implements Serializable {
     private String answer;
 
     private boolean isCorrect;
-
-    private int checkedIsCorrect = 0;
-
+    
+    
+    private int checkedIsCorrect;
+    
     private long expiresOn;
 
     public long getId() {

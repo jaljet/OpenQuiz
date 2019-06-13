@@ -99,7 +99,7 @@ public class GameRest {
                             playerAnswer.setPlayer(player);
                             playerAnswer.setQuestion(question);
                             playerAnswer.setExpiresOn(System.currentTimeMillis()
-                                    + question.getTimeout() + 100);
+                                    + question.getTimeout());
                             gameDAO.persistAnswer(playerAnswer);
                             //remove old info and add new info for the same pair player-question
                             player.getPlayerAnswers().remove(playerAnswer);
@@ -135,7 +135,8 @@ public class GameRest {
                                     PlayerAnswerState playerAnswerState = new PlayerAnswerState();
                                     playerAnswerState.setPlayer(player);
                                     playerAnswerState.setQuestion(nextQuestion);
-                                    playerAnswerState.setExpiresOn(System.currentTimeMillis() + question.getTimeout());
+                                    playerAnswerState.setExpiresOn(System.currentTimeMillis() 
+                                            + question.getTimeout());
                                     gameDAO.addPlayersAnswer(playerAnswerState);
                                     player.setCurrentQuestion(nextQuestion);
                                     player.getPlayerAnswers().add(playerAnswerState);
@@ -166,10 +167,6 @@ public class GameRest {
                             long timeLeft = getRemainingTime(playerAnswerState.getExpiresOn());
                             if (playerAnswerState.getAnswer() != null) {
                                 error(Error.QUESTION_ALREADY_ANSWERED);
-                            } else if (timeLeft <= 0) {
-                                player.setPlayerState(PlayerState.BETWEEN_QUESTIONS);
-                                gameDAO.updatePlayer(player);
-                                return error(Error.TIMEOUT_EXPIRED);
                             }
                             question = player.getCurrentQuestion();
                             if (question.getId() != questionId) {
@@ -181,6 +178,16 @@ public class GameRest {
                             }
                             String correctAnswer = question.getAnswer();
                             providedAnswer = providedAnswer.trim().toLowerCase();
+                            if (timeLeft <= 500L) {
+                                player.setPlayerState(PlayerState.BETWEEN_QUESTIONS);
+                                gameDAO.updatePlayer(player);
+                                playerAnswerState.setCorrect(false);
+                                playerAnswerState.setAnswer(providedAnswer);
+                                playerAnswerState = gameDAO.updateAnswerState(playerAnswerState);
+                                player.getPlayerAnswers().remove(playerAnswerState);
+                                player.getPlayerAnswers().add(playerAnswerState);
+                                return error(Error.TIMEOUT_EXPIRED);
+                            }
                             if (FuzzySearch.ratio(correctAnswer.trim().toLowerCase(),
                                     providedAnswer) >= MATCH_THRESHOLD) {
                                 playerAnswerState.setCorrect(true);
