@@ -5,3 +5,4 @@ node_modules/
 *.iml
 target/
 nbactions.xml
+src/main/webapp/META-INF/context.xml
