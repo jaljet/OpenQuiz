@@ -62,13 +62,6 @@ public class AdminRest {
         log.info("Rules to add: " + rules);
         return Response.status(Response.Status.OK).entity("Rules added.").build();
     }
-    
-    @GET
-    @Path("/rules")
-    public String getRules()  {
-        return gameDAO.getRule().getText();
-    }
-
     @GET
     @Path("/check/answers")
     public String getAnswers()  {

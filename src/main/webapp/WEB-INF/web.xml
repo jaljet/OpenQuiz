@@ -33,7 +33,7 @@
     <security-constraint>
         <web-resource-collection>
             <web-resource-name></web-resource-name>
-            <url-pattern>/rest/*</url-pattern>
+            <url-pattern>/rest/play/*</url-pattern>
             <http-method>GET</http-method>
             <http-method>POST</http-method>
         </web-resource-collection>
