@@ -56,8 +56,11 @@ public class Util {
             if (!tline.equals("")) {
                 Scanner csv = new Scanner(line);
                 csv.useDelimiter(",");
+                if (!csv.hasNext()) continue;
                 String name = csv.next();
+                if (!csv.hasNext()) continue;
                 String rusName = csv.next();
+                if (!csv.hasNext()) continue;
                 String email = csv.next();
                 String office = csv.hasNext() ? csv.next() : "";
                 users.add(new UserInfo(name.trim(), rusName.trim(), email.trim().toLowerCase(), office.trim()));
