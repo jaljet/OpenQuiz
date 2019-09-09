@@ -52,6 +52,7 @@ public class Util {
         Scanner scanner = new Scanner(data);
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
+            if (line.equals(", , ")) continue;
             String tline = line.trim();
             if (!tline.equals("")) {
                 Scanner csv = new Scanner(line);
