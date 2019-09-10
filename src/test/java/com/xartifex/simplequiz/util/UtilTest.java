@@ -5,12 +5,17 @@ import com.xartifex.simplequiz.user.UserInfo;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Test;
+import org.slf4j.Logger;
 
+import javax.inject.Inject;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Set;
 
 public class UtilTest {
+
+    @Inject
+    Logger log;
 
     public static final String TEST_INPUT_1 ="Героиня повести Дафны дю Морье́ вынуждена отправить любимую дочь в пансион далеко от дома. Поэтому ОНИ для героини были как островки цветного бисера на сером полотне, натянутом на пяльцы. Назовите ИХ словом латинского происхождения. \t| Каникулы ||\n" +
             "Внимание, в вопросе есть замена. Укулеле – это четырехструнная гавайская гитара. Миниатюрность этого инструмента и тот факт, что его название переводится как «прыгающая Стрекоза» позволяет сравнить мастеров, делающих укулеле, с персонажем произведения Николая Семеновича. Назовите слово, которое мы заменили на «стрекоза».| \tБлоха||";
@@ -41,7 +46,7 @@ public class UtilTest {
 
     @Test
     public void getUsers() throws Exception {
-        Set<UserInfo> users = Util.getUsers(USERS_TEST_INPUT);
+        Set<UserInfo> users = Util.getUsers(USERS_TEST_INPUT, log);
         Assert.assertTrue(users.size() == 4);
     }
 
