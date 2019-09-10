@@ -3,8 +3,7 @@ package com.xartifex.simplequiz.util;
 import com.xartifex.simplequiz.model.Question;
 import com.xartifex.simplequiz.model.Rule;
 import com.xartifex.simplequiz.user.UserInfo;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
+import org.slf4j.Logger;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -47,7 +46,7 @@ public class Util {
         return timeout;
     }
 
-    public static Set<UserInfo> getUsers(String data) {
+    public static Set<UserInfo> getUsers(String data, Logger log) {
         Set<UserInfo> users = new HashSet<>();
         Scanner scanner = new Scanner(data);
         while (scanner.hasNextLine()) {
@@ -63,6 +62,10 @@ public class Util {
                 if (!csv.hasNext()) continue;
                 String email = csv.next();
                 String office = csv.hasNext() ? csv.next() : "";
+                if (name.trim().equals("") || email.trim().equals("")) {
+                    log.info("incorrect user data: " + line);
+                    continue;
+                }
                 users.add(new UserInfo(name.trim(), rusName.trim(), email.trim().toLowerCase(), office.trim()));
             }
         }
