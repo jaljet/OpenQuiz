@@ -16,11 +16,13 @@ select email, office,  (case iscorrect when 'true' then 1 else 0 end) points
 group by email order by total desc)
 
 --show players results
-select rownum(), email, office, total from (
-select email, office, sum(points) total  from (
-select email, office,  (case iscorrect when 'true' then 1 else 0 end) points
-    from playeranswerstate a
-    right join player p on a.player = p.id and iscorrect='true'
-    join users u on u.email = p.name)
-group by email order by total desc)
-
+SELECT USERS.USERNAME, USERS.RUSNAME, USERS.EMAIL, WINNERCOUNT, WINNERTIME FROM
+	USERS JOIN PLAYER ON USERS.EMAIL = PLAYER.NAME
+	JOIN (SELECT WINNER, WINNERCOUNT, WINNERTIME FROM
+		(SELECT PLAYER AS WINNER   , COUNT (*)  AS WINNERCOUNT  FROM
+			PLAYERANSWERSTATE WHERE ISCORRECT = 'TRUE' OR CHECKEDISCORRECT = 1 GROUP BY PLAYER)
+		JOIN  (SELECT PLAYER AS WINNERT, (MAX(EXPIRESON) - MIN (EXPIRESON))/1000 AS WINNERTIME FROM
+			PLAYERANSWERSTATE GROUP BY PLAYER)
+		ON WINNER = WINNERT)
+	ON PLAYER.ID =  WINNER
+ORDER BY WINNERCOUNT DESC, WINNERTIME
