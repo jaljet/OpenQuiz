@@ -38,7 +38,6 @@ simpleQuiz.shell = (function () {
             + '<div class="simple-quiz-shell-foot simple-quiz-shell-hidden"></div>'
             + '<div class="simple-quiz-shell-welcome simple-quiz-shell-hidden"><div><h3>Добро пожаловать на онлайн викторину!</h3>'
             + '<p id="rules"></p>'
-            + '<p>На каждый вопрос дана одна минута.</p>'
             + '<input id="welcomeStart" type="submit" value="Получить первый вопрос"></div>'
             + '</div>'
             + '<div class="simple-quiz-shell-gameover simple-quiz-shell-hidden"><div>'
@@ -150,7 +149,7 @@ simpleQuiz.shell = (function () {
                          var rules = document.getElementById('rules');
                          rules.innerHTML = $.ajax({
                             type: "GET",
-                            url: "rest/admin/rules",
+                            url: "rest/rules",
                             async: false,
                             }).responseText;
         });

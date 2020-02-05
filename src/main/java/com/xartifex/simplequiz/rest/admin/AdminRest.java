@@ -47,7 +47,7 @@ public class AdminRest {
     @Consumes("text/plain")
     @Produces("text/plain")
     public Response addPlayers(String data) {
-        Set<UserInfo> users = Util.getUsers(data);
+        Set<UserInfo> users = Util.getUsers(data, log);
         userDAO.addUsers(users);
         log.info("Players to add: " + users);
         return Response.status(Response.Status.OK).entity("Users added.").build();
@@ -62,13 +62,6 @@ public class AdminRest {
         log.info("Rules to add: " + rules);
         return Response.status(Response.Status.OK).entity("Rules added.").build();
     }
-    
-    @GET
-    @Path("/rules")
-    public String getRules()  {
-        return gameDAO.getRule().getText();
-    }
-
     @GET
     @Path("/check/answers")
     public String getAnswers()  {
