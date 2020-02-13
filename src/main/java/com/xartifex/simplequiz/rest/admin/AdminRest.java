@@ -67,12 +67,21 @@ public class AdminRest {
     public String getAnswers()  {
         return gameDAO.getAnswers();
     }
+    
+    @GET
+    @Path("/check/sortedbyanswers")
+    public String getSortedByAnswers()  {
+        return gameDAO.getSortedByAnswers();
+    }
 
     @POST
     @Path("/check/answer")
     @Consumes("text/plain")
     @Produces("text/plain")
-    public Response checkAnswer(String data)  {
+    public Response checkAnswer(String data)  { 
+        if(data.startsWith("0")){
+            data = data.substring(1);
+        }
         StringTokenizer st = new StringTokenizer(data, "|");
         gameDAO.checkAnswer(Long.parseLong(st.nextToken()), Integer.parseInt(st.nextToken()));
         log.info("Answers checked");

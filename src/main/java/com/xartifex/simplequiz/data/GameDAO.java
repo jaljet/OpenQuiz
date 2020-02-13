@@ -141,6 +141,17 @@ public class GameDAO {
         }
         return  result;
     }
+    
+     public String getSortedByAnswers(){
+        String result = "";
+        Query query = em.createQuery("FROM PlayerAnswerState as p order by p.question desc");
+        List<PlayerAnswerState> answers = new ArrayList<>();
+        answers = query.getResultList();
+        for (PlayerAnswerState answer: answers) {
+            result = result + answer.toShortString();
+        }
+        return  result;
+    }
 
     public void checkAnswer(long id,int correct){
         String sQuery = "Update PlayerAnswerState Set checkedIsCorrect = :correct where id = :id";
