@@ -41,7 +41,7 @@ public class Util {
 
         long timeout = 0;
         Scanner timeoutScanner = new Scanner(data);
-        timeout =  Long.valueOf(timeoutScanner.next().trim());
+        timeout =  1000L*Long.valueOf(timeoutScanner.next().trim());
 
         return timeout;
     }

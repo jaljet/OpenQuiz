@@ -1,19 +1,20 @@
+
 <!DOCTYPE html>
 <html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="css/jquery-ui.css"/>
-    <script type="text/javascript" src="js/lib/jquery-3.2.1.js"></script>
-    <script type="text/javascript" src="js/simple-quiz-check.js"></script>
-    <script type="text/javascript" src="js/lib/jquery-ui.js"></script>
-    <script type="text/javascript">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="css/jquery-ui.css"/>
+        <script type="text/javascript" src="js/lib/jquery-3.2.1.js"></script>
+        <script type="text/javascript" src="js/simple-quiz-check.js"></script>
+        <script type="text/javascript" src="js/lib/jquery-ui.js"></script>
+        <script type="text/javascript">
         $( document ).ready( function() {
-            $( "#tabs" ).tabs();
-            var answers = getAnswers();
+              $( "#tabs" ).tabs();
+                var answers = getAnswers();
             for (var i = 0; i < answers.length-1; i++) {
-                var answer = answers[i].split('|');
-                var corrected = '';
+                    var answer = answers[i].split('|');
+                    var corrected = '';
                 if (answer[6] == 1) corrected = 'true';
                 if (answer[6] == 2) corrected = 'false';
                 $("#mainTable").append("<tr>"+
@@ -25,31 +26,50 @@
                     "<td align='center'>"+ answer[5] +"</td>"+
                     "<td id='"+ answer[7] +"' align='center' correctCode='"+ answer[6] +"'>"+ corrected +"</td>"+
                     "<td><button type='submit' class='check-button' answerId='"+ answer[7] +"'>Correct</button></td>"+
-                "</tr>");
-            }
-            $("body").on("click", ".check-button", function () {
-                event.preventDefault();
+                            "</tr>");
+                }
+                
+        //$( "#tabs" ).tabs();
+               var answerssorted = getSortedByAnswers();
+            for (var i = 0; i < answerssorted.length-1; i++) {
+                    var answer = answerssorted[i].split('|');
+                    var corrected = '';
+                if (answer[6] == 1) corrected = 'true';
+                if (answer[6] == 2) corrected = 'false';
+                $("#secondaryTable").append("<tr>"+
+                    "<td align='center'>"+ answer[0] +"</td>"+
+                    "<td align='justify'>"+ answer[1] +"</td>"+
+                    "<td align='center'>"+ answer[2] +"</td>"+
+                    "<td align='center'>"+ answer[3] +"</td>"+
+                    "<td align='center'>"+ answer[4] +"</td>"+
+                    "<td align='center'>"+ answer[5] +"</td>"+
+                    "<td id='"+ 0 + answer[7] +"' align='center' correctCode='"+ 0 + answer[6] +"'>"+ corrected +"</td>"+
+                    "<td><button type='submit' class='check-button' answerId='"+ 0 + answer[7] +"'>Correct</button></td>"+
+                            "</tr>");
+                }
+                $("body").on("click", ".check-button", function () {
+                    event.preventDefault();
                 var answerid = $(this).attr('answerId');
                 if($("#" + answerid).attr('correctCode') == '1') checkAnswer(answerid, 2, 'false');
                 else checkAnswer(answerid, 1, 'true');
             });
         });
     </script>
-</head>
-<body>
-    <div id="tabs">
-        <ul>
-            <li><a href="#tabs-10">Результаты викторины</a></li>
-            <li><a href="#tabs-20">Группировка по вопросам</a></li>
-        </ul>
-        <div id="tabs-10">
-            <form id="checkAnswers">
-                <p><b>Результаты викторины</b></p>
-                <p>
+    </head>
+    <body>
+        <div id="tabs">
+            <ul>
+                <li><a href="#tabs-10">Результаты викторины</a></li>
+                <li><a href="#tabs-20">Группировка по вопросам</a></li>
+            </ul>
+            <div id="tabs-10">
+                <form id="checkAnswers">
+                    <p><b>Результаты викторины</b></p>
+                    <p>
                     <table id="mainTable" border="1" cellspacing="0">
                         <tr>
                             <th scope="col">Player</th>
-                            <th scope="col">Qusetion</th>
+                            <th scope="col">Question</th>
                             <th scope="col">Correct answer</th>
                             <th scope="col">Player's answer</th>
                             <th scope="col">Answer time</th>
@@ -58,12 +78,28 @@
                             <th scope="col">Button</th>
                         </tr>
                     </table>
-                </p>
-            </form>
+                    </p>
+                </form>
+            </div>
+            <div id="tabs-20">
+                <form id="sortedAnswers">
+                    <p><b>Группировка по вопросам</b></p>
+                    <p>
+                    <table id="secondaryTable" border="1" cellspacing="0">
+                        <tr>
+                            <th scope="col">Player</th>
+                            <th scope="col">Question</th>
+                            <th scope="col">Correct answer</th>
+                            <th scope="col">Player's answer</th>
+                            <th scope="col">Answer time</th>
+                            <th scope="col">Is correct</th>
+                            <th scope="col">Checked correct</th>
+                            <th scope="col">Button</th>
+                        </tr>
+                    </table>
+                    </p>
+                </form>
+            </div>
         </div>
-        <div id="tabs-20">
-        <p><b>Группировка по вопросам</b></p>
-        </div>
-    </div>
-</body>
+    </body>
 </html>

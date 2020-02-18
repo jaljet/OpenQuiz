@@ -4,3 +4,6 @@ node_modules/
 .idea/
 *.iml
 target/
+nbactions.xml
+src/main/webapp/META-INF/context.xml
+nb-configuration.xml

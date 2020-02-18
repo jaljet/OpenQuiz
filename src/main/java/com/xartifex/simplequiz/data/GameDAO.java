@@ -125,6 +125,7 @@ public class GameDAO {
     public void addRules(List<Rule> rules) {
         addRule(rules.get(rules.size() - 1));
     }
+    
     public Rule getRule (){
         Query query = em.createQuery("FROM Rule");
         return (Rule) query.getSingleResult();
@@ -134,6 +135,17 @@ public class GameDAO {
         String result = "";
         Query query = em.createQuery("FROM PlayerAnswerState");
         List<PlayerAnswerState> answers = new ArrayList<PlayerAnswerState>();
+        answers = query.getResultList();
+        for (PlayerAnswerState answer: answers) {
+            result = result + answer.toShortString();
+        }
+        return  result;
+    }
+    
+     public String getSortedByAnswers(){
+        String result = "";
+        Query query = em.createQuery("FROM PlayerAnswerState as p order by p.question desc");
+        List<PlayerAnswerState> answers = new ArrayList<>();
         answers = query.getResultList();
         for (PlayerAnswerState answer: answers) {
             result = result + answer.toShortString();
